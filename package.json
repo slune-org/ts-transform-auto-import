@@ -1,0 +1,81 @@
+{
+  "name": "ts-transform-auto-import",
+  "version": "1.0.0",
+  "description": "Typescript transformer used to import all files matching a pattern",
+  "keywords": [
+    "typescript",
+    "transform",
+    "automatic",
+    "import",
+    "glob"
+  ],
+  "homepage": "https://github.com/slune-org/ts-transform-auto-import#readme",
+  "bugs": {
+    "url": "https://github.com/slune-org/ts-transform-auto-import/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/slune-org/ts-transform-auto-import.git"
+  },
+  "license": "MIT",
+  "author": "Slune",
+  "type": "commonjs",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "files": [
+    "dist/**",
+    "!dist/__test__/**",
+    "!dist/**/*.spec.*",
+    "!dist/**/*.map"
+  ],
+  "scripts": {
+    "prepublishOnly": "pm-exec run all",
+    "all": "pm-exec run clean && pm-exec run test && pm-exec run build",
+    "test": "pm-exec run test:lint && pm-exec run test:depends && pm-exec run test:unit",
+    "test:lint": "eslint --config .eslintrc.full.yaml --max-warnings 0 'src/**/*.ts'",
+    "test:depends": "depcheck",
+    "test:unit": "nyc mocha 'src/**/*.spec.ts'",
+    "build": "pm-exec run build:main",
+    "build:main": "tsc",
+    "debug": "pm-exec run debug:watch",
+    "debug:watch": "onchange 'src/**' -- pm-exec run test:unit",
+    "clean": "rimraf dist && rimraf __test__/dist"
+  },
+  "dependencies": {
+    "glob": "^8.0.3",
+    "simple-ts-transform": "^1.2.0"
+  },
+  "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "1.0.2",
+    "@types/chai": "4.3.3",
+    "@types/glob": "8.0.0",
+    "@types/mocha": "9.1.1",
+    "@types/node": "18.7.16",
+    "@typescript-eslint/eslint-plugin": "5.36.2",
+    "@typescript-eslint/parser": "5.36.2",
+    "chai": "4.3.6",
+    "depcheck": "1.4.3",
+    "eslint": "8.23.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-jsdoc": "39.3.6",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-prettier": "4.2.1",
+    "mocha": "10.0.0",
+    "nyc": "15.1.0",
+    "onchange": "7.1.0",
+    "pm-exec": "1.0.0",
+    "prettier": "2.7.1",
+    "rimraf": "3.0.2",
+    "source-map-support": "0.5.21",
+    "ts-node": "10.9.1",
+    "ts-transform-test-compiler": "1.2.0",
+    "typescript": "4.8.3"
+  },
+  "peerDependencies": {
+    "typescript": "^4.8.3"
+  },
+  "engines": {
+    "node": ">=16.10.0"
+  }
+}
